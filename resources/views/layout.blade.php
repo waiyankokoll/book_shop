@@ -20,6 +20,18 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('mytemplate_assts/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{asset('mytemplate_assts/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+    </style>
 
 
 </head>

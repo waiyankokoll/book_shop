@@ -21,14 +21,14 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('homepage');
-Route::get('/detail', [App\Http\Controllers\FrontendController::class, 'detail'])->name('detailpage');
+Route::get('/detail/{id}', [App\Http\Controllers\FrontendController::class, 'detail'])->name('detailpage');
+Route::get('/cart', [App\Http\Controllers\FrontendController::class, 'cart'])->name('cartpage');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test-owner', function () {
-    return 'You are owner';
-})->middleware(['auth', 'role:owner']);
-Route::group(['middleware' => ['auth']], function () {
+
+Route::group(['middleware' => ['auth','role:owner']], function () {
     Route::resource('categories', App\Http\Controllers\CategoryController::class);
     Route::resource('authors', App\Http\Controllers\AuthorController::class);
     Route::resource('books', App\Http\Controllers\BookController::class);
