@@ -83,11 +83,11 @@
                                         </div>
 
                                     </div>
-                                    
-
-                                     
+                                    @guest
+                                    <a href="/login" class="btn w-100 btn-primary mt-5 mb-0">Login To Check Out</a>
+                                    @else
                                     <button class="btn w-100 btn-primary mt-5 mb-0">Check Out</button>
-                                    
+                                    @endguest
                                     
 
                                 </div>

@@ -5,12 +5,14 @@ $(document).ready(function(){
         let id = $(this).data('id');
         let image = $(this).data('image');
         let name = $(this).data('name');
+        let author = $(this).data('author');
         let price = $(this).data('price');
         //console.log(id,name,price);
         let items = {
             id: id,
             name: name,
             image: image,
+            author: author,
             price:price,
             qty: 1
         }
@@ -74,15 +76,22 @@ $(document).ready(function(){
             let total = 0;
             $.each(itemArray,function(i,v){
                 let name = v.name;
+                let author = v.author;
                 let image = v.image;
                 let price = v.price;
                 let qty = v.qty;
 
                 data += `<tr>
                                 <th scope="row" class="align-middle">${no++}</th>
-                                <td class="fw-bold align-middle">
-                                    <img src="${image}" alt="" style="width: 9%" class="align-middle">
-                                    ${name}</td>
+                                <td>
+                            <div class="d-flex align-items-center">
+                              <img src="${image}" width="75" alt="..." />
+                              <div class="ms-3">
+                              <div class="fw-bold">${name}</div>
+                              <div class="text-muted">${author}</div>
+                              </div>
+                            </div>
+                          </td>
                                 <td class="align-middle"><button class="min" data-key="${i}"> - </button>
                                 ${qty}
                                 <button class="max" data-key="${i}"> + </button></td>
