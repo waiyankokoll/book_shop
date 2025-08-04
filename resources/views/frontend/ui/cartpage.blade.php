@@ -41,58 +41,60 @@
 
                     </div>
                     <div class="col-md-4">
-                        <div class="card bg-light">
-                            <div class="card-body">
-                                <h2 class="fw-bold card-title">Payment Info</h2>
-                                <div class="container">
-                                    <hr>
+                        <form action="" method="POST" onsubmit="return checkout()">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h2 class="fw-bold card-title">Payment Info</h2>
+                                    <div class="container">
+                                        <hr>
 
-                                </div>
-                                <div class="mb-3 card-body">
-                                    <p><label for="" class="form-label text-secondary mb-0">Payment Method:</label></p>
-                                     <div class="form-check">
-                                        <input type="radio" name="paymentMethod" id="creditCard" class="form-check-input">
-                                        <i class="fa-solid fa-credit-card"></i> 
-                                        <label for="creditCard" class="form-label fs-6 fw-bold">Credit Card</label>
                                     </div>
-                                    <div class="form-check mt-0">
-                                        <input type="radio" name="paymentMethod" id="kbzPay" class="form-check-input">
-                                        <img src="{{asset('frontend/image/kbzpay.jpg')}}" alt="KBZPay" class="" style="width: 8%;">
-                                        <label for="kbzPay" class="form-label fs-6 fw-bold">KBZ Pay</label>
-                                    </div>
-                                    <div class="form-check mt-2">
-                                        <input type="radio" name="paymentMethod" id="wavePay" class="form-check-input">
-                                        <img src="{{asset('frontend/image/wave.jpg')}}" alt="KBZPay" class="" style="width: 8%;">
-                                        <label for="wavePay" class="form-label fs-6 fw-bold">Wave Pay</label>
-                                    </div>
-                                    <div id="creditCardInput" class="d-none ">
-                                        <label for="cardNumber" class="form-label text-secondary mt-2">Card Number :</label>
-                                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
-                                    </div>
-                                    
-                                    <div class=" mt-3 w-100">
-                                        <label for="cardNumber" class="form-label text-secondary mt-2">Phone Number :</label>
-                                        <input type="number" name="" id="phoneNumber" class="form-control" placeholder="Phone Number">
+                                    <div class="mb-3 card-body">
+                                        <p><label for="" class="form-label text-secondary mb-0">Payment Method:</label></p>
+                                        {{-- <div class="form-check">
+                                            <input type="radio" name="paymentMethod" id="creditCard" class="form-check-input" value="creditCard">
+                                            <i class="fa-solid fa-credit-card"></i> 
+                                            <label for="creditCard" class="form-label fs-6 fw-bold">Credit Card</label>
+                                        </div> --}}
+                                        <div class="form-check mt-0">
+                                            <input type="radio" name="paymentMethod" id="kbzPay" class="form-check-input" value="kpay">
+                                            <img src="{{asset('frontend/image/kbzpay.jpg')}}" alt="KBZPay" class="" style="width: 8%;">
+                                            <label for="kbzPay" class="form-label fs-6 fw-bold" >KBZ Pay</label>
+                                        </div>
+                                        <div class="form-check mt-2">
+                                            <input type="radio" name="paymentMethod" id="wavePay" class="form-check-input"  value="wave">
+                                            <img src="{{asset('frontend/image/wave.jpg')}}" alt="KBZPay" class="" style="width: 8%;">
+                                            <label for="wavePay" class="form-label fs-6 fw-bold">Wave Pay</label>
+                                        </div>
+                                        {{-- <div id="creditCardInput" class="d-none ">
+                                            <label for="cardNumber" class="form-label text-secondary mt-2">Card Number :</label>
+                                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                                        </div> --}}
+                                        
+                                        <div class=" mt-3 w-100">
+                                            <label for="phone" class="form-label text-secondary mt-2">Phone Number :</label>
+                                            <input type="number" name=""  class="form-control" placeholder="Phone Number" id="phone">
 
-                                    
-                                    {{-- address --}}
-                                        <div class=" mt-2">
-                                            <label for="cardNumber" class="form-label text-secondary mt-2"> Address :</label>
-                                            <textarea name="" id="address" cols="30" rows="" class="form-control" placeholder="Address">  </textarea>
+                                        
+                                        {{-- address --}}
+                                            <div class=" mt-2">
+                                                <label for="address" class="form-label text-secondary mt-2"> Address :</label>
+                                                <textarea name=""  cols="30" rows="" class="form-control" placeholder="Address" id="address" ></textarea>
+
+                                            </div>
 
                                         </div>
+                                        @guest
+                                        <a href="/login" class="btn w-100 btn-primary mt-5 mb-0">Login To Check Out</a>
+                                        @else
+                                        <button type="submit" class="btn w-100 btn-primary mt-5 mb-0">Check Out</button>
+                                        @endguest
+                                        
 
                                     </div>
-                                    @guest
-                                    <a href="/login" class="btn w-100 btn-primary mt-5 mb-0">Login To Check Out</a>
-                                    @else
-                                    <button class="btn w-100 btn-primary mt-5 mb-0">Check Out</button>
-                                    @endguest
-                                    
-
                                 </div>
                             </div>
-
+                        </form>
                     </div>
                     
                         
@@ -103,4 +105,51 @@
         
         
 
+@endsection
+@section('script')
+        <script>
+            function checkout(){
+                
+                let payment = $('input[name= "paymentMethod"]:checked').val();
+                let phone = $('#phone').val();
+                let address = $('#address').val();                
+                let itemstring = localStorage.getItem('bookCart');
+
+                if (payment == null) {
+                    alert ("please selet patment method")
+                }else if (phone == '') {
+                    alert ("please enter Phone number")
+                }else if (address == '') {
+                    alert ("please enter address ")
+                }else if (!itemstring || itemstring == '') {
+                    alert ("empty cart list")
+                }
+                console.log(payment + ' ' + phone + ' ' + address + itemstring);
+                $.post('{{route('orders.store')}}' , {
+                    _token: '{{csrf_token()}}',
+                    _method: 'POST',
+                    payment:payment,
+                    phone:phone,
+                    address:address,
+                    itemstring:itemstring
+                }).done(function(data){
+                    console.log("OK OK -->" , data);
+                    localStorage.clear();
+                    $('tbody').html('<tr><td colspan="6" class="text-center">Order successfull</td></tr>');
+                    $('#phone').val('');
+                    $('#address').val(''); 
+                    
+                    
+                }).fail(function(data){
+                    console.log("failed -->" , data);
+                    alert("Fail to checkout")
+                    
+                })
+                
+
+                //alert(payment + ' ' + phone + ' ' + address);
+                return false
+            }
+        </script>
+    
 @endsection

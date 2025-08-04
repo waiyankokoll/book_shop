@@ -21,10 +21,14 @@
         <!-- Navigation-->
         @include('frontend.parts.nav')
         <!-- Header-->
-        @yield('content')
+        <main class="">
+            @yield('content')
+        </main>
 
         <!-- Footer-->
-        @include('frontend.parts.footer')
+        <footer class="sticky-bottom">
+            @include('frontend.parts.footer')
+        </footer>
         
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -34,5 +38,6 @@
         <!-- Core theme JS-->
         <script src="{{asset('frontend/js/scripts.js')}}"></script>
         <script src="{{asset('frontend/js/cart.js')}}"></script>
+        @yield('script')
     </body>
 </html>

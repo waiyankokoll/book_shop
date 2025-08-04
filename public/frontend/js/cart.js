@@ -157,26 +157,26 @@ $(document).ready(function(){
 //     }
 //     });
 
-    $('tbody').on('click','.delete',function(){
-        let key = $(this).data('key');
-        // alert("sksdjkjdf");
-        let itemstring = localStorage.getItem('bookCart');
-        if(itemstring){
-            let itemArray = JSON.parse(itemstring);
-                let ans = confirm('Are you sure remove');
-                if (ans) {
-                    itemArray.splice(key,1);
+    // $('tbody').on('click','.delete',function(){
+    //     let key = $(this).data('key');
+    //     // alert("sksdjkjdf");
+    //     let itemstring = localStorage.getItem('bookCart');
+    //     if(itemstring){
+    //         let itemArray = JSON.parse(itemstring);
+    //             let ans = confirm('Are you sure remove');
+    //             if (ans) {
+    //                 itemArray.splice(key,1);
 
                     
-                }else{
-                    v.qty = 1;
-                }
-            let itemdata = JSON.stringify(itemArray);
-            localStorage.setItem('bookCart',itemdata);
-            getdata();
-            count();
-        }
-    })
+    //             }else{
+    //                 v.qty = 1;
+    //             }
+    //         let itemdata = JSON.stringify(itemArray);
+    //         localStorage.setItem('bookCart',itemdata);
+    //         getdata();
+    //         count();
+    //     }
+    // })
 
     $('tbody').on('click','.min',function(){
         let key = $(this).data('key');

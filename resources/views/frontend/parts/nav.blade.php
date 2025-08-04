@@ -25,13 +25,7 @@
 
                     </div> --}}
                     
-                    <form class="d-flex">
-                        <a class="btn btn-outline-dark" href="{{ route('cartpage') }}" type="button">
-                            <i class="bi-cart-fill me-1" ></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="item-count">0</span>
-                        </a>
-                    </form>
+                    
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
@@ -66,6 +60,13 @@
                             </li>
                         @endguest
                     </ul>
+                    <form class="d-flex">
+                        <a class="btn btn-outline-dark" href="{{ route('cartpage') }}" type="button">
+                            <i class="bi-cart-fill me-1" ></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="item-count">0</span>
+                        </a>
+                    </form>
                      {{-- <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -28,7 +29,25 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = new Order();
+        $order->user_id = Auth()->user()->id;
+        $order->order_number = uniqid();
+        $order->phone_number = $request->phone;
+        $order->shipping_address = $request->address;
+        $order->payment_type =$request->payment;
+        $total = 0;
+        $itemArray = json_decode($request->itemstring);
+        foreach ($itemArray as $item) {
+            $total += $item->price * $item->qty;
+        }
+        $order->total_amount = $total;
+        $order->save();
+        foreach ($itemArray as $item) {
+            $order->books()->attach($item->id,['quantity'=> $item->qty]);
+        }
+        return response()->json([
+            'order'=>$order
+        ]);
     }
 
     /**
