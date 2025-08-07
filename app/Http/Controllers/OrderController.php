@@ -8,12 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:owner')->only('index');
+        $this->middleware('role:customer')->only('store');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $order = Order::orderBy('id','desc')->get();
+        return view('order.list', compact('order'));
     }
 
     /**
@@ -55,7 +61,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('order.deail',compact('order'));
     }
 
     /**

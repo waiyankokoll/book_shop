@@ -17,6 +17,11 @@
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="{{ route('orders.index') }}">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Order list</span></a>
+  </li>
 
   <!-- Divider -->
   <hr class="sidebar-divider">

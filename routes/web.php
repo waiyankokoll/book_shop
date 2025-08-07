@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('homepage');
 Route::get('/detail/{id}', [App\Http\Controllers\FrontendController::class, 'detail'])->name('detailpage');
 Route::get('/cart', [App\Http\Controllers\FrontendController::class, 'cart'])->name('cartpage');
-Route::resource('orders', App\Http\Controllers\OrderController::class);
+Route::resource('orders', App\Http\Controllers\OrderController::class)->middleware('auth');
 
 
 Auth::routes();

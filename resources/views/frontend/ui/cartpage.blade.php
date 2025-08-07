@@ -87,7 +87,10 @@
                                         @guest
                                         <a href="/login" class="btn w-100 btn-primary mt-5 mb-0">Login To Check Out</a>
                                         @else
-                                        <button type="submit" class="btn w-100 btn-primary mt-5 mb-0">Check Out</button>
+                                        <button type="submit" class="btn w-100 btn-primary mt-5 mb-0" @role('owner') disabled @endrole>Check Out</button>
+                                        @role('owner')
+                                            <p class="text-danger">Your an owner</p> 
+                                        @endrole
                                         @endguest
                                         
 
@@ -135,6 +138,7 @@
                 }).done(function(data){
                     console.log("OK OK -->" , data);
                     localStorage.clear();
+                    $('#item-count').text('0')
                     $('tbody').html('<tr><td colspan="6" class="text-center">Order successfull</td></tr>');
                     $('#phone').val('');
                     $('#address').val(''); 
